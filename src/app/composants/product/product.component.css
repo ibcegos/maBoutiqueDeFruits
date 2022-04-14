@@ -1,3 +1,12 @@
 #available {
     font-size: 30px;
 }
+
+img {
+    width : 40vw;
+    height : 30vh;
+    max-width : 400px;
+    max-height : 300px;
+    min-width: 5vw;
+    min-height: 4vh;
+}
