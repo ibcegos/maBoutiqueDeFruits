@@ -1,0 +1,74 @@
+<div class="container">
+
+    <h1 class="text-center text-warning mt-4 mb-4">La liste de mes produits : {{ productsList.length }} </h1>
+
+    <div class="row">
+        <div class="col-6" >
+            <h6 class="text-info text-center">Chercher par tranche de prix</h6>
+            <!-- ********** Début formulaire price range ************** -->
+            <form class="border border-dark" #priceRangeForm="ngForm" (ngSubmit)="priceRange(priceRangeForm)" >
+                <div class="row">
+                    <div class="col-4 d-flex align-items-center">
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="min" placeholder="Entrez le prix min" ngModel>
+                        </div>
+                    </div>
+                    <div class="col-4 d-flex align-items-center">
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="max" placeholder="Entrez le prix max" ngModel>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary" >Cherchez par tranche de prix</button>
+                    </div>
+                </div>
+            </form>
+            <!-- ********** Fin formulaire price range **************** -->
+        </div>
+        <div class="col-6">
+            <h6 class="text-info text-center">Chercher par mot clé</h6>
+            <!-- ********** Début formulaire keyword ************** -->
+            <form class="border border-dark" #searchByKeywordForm="ngForm" (ngSubmit)="searchByKeyword(searchByKeywordForm)" >
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="keyword" placeholder="Cherchez par mot clé" ngModel>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary">Cherchez par mot clé</button>
+                    </div>
+                </div>
+            </form>
+            <!-- ********** Fin formulaire keyword **************** -->
+        </div>
+    </div>
+
+    <section class="row mt-4">
+
+        <div class="text-center ml-4 mb-4 pl-4 pb-4 bg-success" *ngIf="show">Le produit est supprimé</div>
+
+        <div class="card col-4 border border-dark" *ngFor="let product of productsList">
+            <img src="{{ product.image }}" class="card-img-top shadow-sm" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.title }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+
+                <div class="row ">
+                    <div class="col-4">
+                        <a href="#" class="btn btn-primary btn-lg disabled">{{ product.price }} €</a>
+                    </div>
+                    <div class="col-4">
+                        <a id="available" class="fa-solid"
+                            [ngClass]="{'text-success fa-thumbs-up': product.available, 'text-danger fa-thumbs-down': !product.available}"
+                            (click)="changeAvaibility(product)"></a>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-secondary btn-lg" (click)="deleteProduct(product.id)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
