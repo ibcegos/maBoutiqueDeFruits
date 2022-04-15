@@ -3,23 +3,25 @@
     <h1 class="text-center text-warning mt-4 mb-4">La liste de mes produits : {{ productsList.length }} </h1>
 
     <div class="row">
-        <div class="col-6" >
+        <div class="col-6">
             <h6 class="text-info text-center">Chercher par tranche de prix</h6>
             <!-- ********** Début formulaire price range ************** -->
-            <form class="border border-dark" #priceRangeForm="ngForm" (ngSubmit)="priceRange(priceRangeForm)" >
+            <form class="border border-dark" #priceRangeForm="ngForm" (ngSubmit)="priceRange(priceRangeForm)">
                 <div class="row">
                     <div class="col-4 d-flex align-items-center">
                         <div class="form-group">
-                            <input type="number" class="form-control" name="min" placeholder="Entrez le prix min" ngModel>
+                            <input type="number" class="form-control" name="min" placeholder="Entrez le prix min"
+                                ngModel>
                         </div>
                     </div>
                     <div class="col-4 d-flex align-items-center">
                         <div class="form-group">
-                            <input type="number" class="form-control" name="max" placeholder="Entrez le prix max" ngModel>
+                            <input type="number" class="form-control" name="max" placeholder="Entrez le prix max"
+                                ngModel>
                         </div>
                     </div>
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary" >Cherchez par tranche de prix</button>
+                        <button type="submit" class="btn btn-primary">Cherchez par tranche de prix</button>
                     </div>
                 </div>
             </form>
@@ -28,11 +30,13 @@
         <div class="col-6">
             <h6 class="text-info text-center">Chercher par mot clé</h6>
             <!-- ********** Début formulaire keyword ************** -->
-            <form class="border border-dark" #searchByKeywordForm="ngForm" (ngSubmit)="searchByKeyword(searchByKeywordForm)" >
+            <form class="border border-dark" #searchByKeywordForm="ngForm"
+                (ngSubmit)="searchByKeyword(searchByKeywordForm)">
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="keyword" placeholder="Cherchez par mot clé" ngModel>
+                            <input type="text" class="form-control" name="keyword" placeholder="Cherchez par mot clé"
+                                ngModel>
                         </div>
                     </div>
                     <div class="col-6">
@@ -65,6 +69,61 @@
                     </div>
                     <div class="col-4">
                         <button class="btn btn-secondary btn-lg" (click)="deleteProduct(product.id)">Delete</button>
+                    </div>
+                    <div class="col-4">
+                        <!-- ***************************** Start Modal ************************** -->
+                        <!-- Button trigger modal -->
+                        <button type="button" (click)="editProduct(product)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Modifier
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modifier le produit</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- ****************************** Start form edit ***************************** -->
+                                        <form #updateForm="ngForm" >
+                                            <!-- (ngSubmit)="updateProduct(updateForm)" -->
+                                            <div class="form-group">
+                                                <label>Nom de votre produit</label>
+                                                <input type="text" class="form-control" [(ngModel)]="productEdit.title" name="title">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Description du produit</label>
+                                                <input type="text" class="form-control" [(ngModel)]="productEdit.description" name="description">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Image du produit</label>
+                                                <input type="text" class="form-control" [(ngModel)]="productEdit.image" name="image">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Prix du produit</label>
+                                                <input type="number" class="form-control" [(ngModel)]="productEdit.price" name="price">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Disponibilité du produit</label>
+                                                <input type="text" class="form-control" [(ngModel)]="productEdit.available" name="available">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="submit" (click)="updateProduct()" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                                            </div>
+                                        </form>
+                                         <!-- ****************************** End form edit ***************************** -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ****************************** End Modal ***************************** -->
                     </div>
                 </div>
             </div>
