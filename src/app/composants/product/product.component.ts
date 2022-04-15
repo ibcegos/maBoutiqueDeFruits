@@ -13,11 +13,15 @@ export class ProductComponent implements OnInit {
   productsList:any;
   show:boolean=false;
   productEdit = {title:"", description:"", image:"", price:0, available:true}
+  isConnected = this.productService.isConnect;
 
   constructor(private productService:ProductsService, private router:Router) { }
 
   ngOnInit(): void {
+    this.isConnected;
+
     this.getProducts();
+    
   }
 
   getProducts() {
