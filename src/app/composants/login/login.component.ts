@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,13 +9,22 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  pseudo = "Rashito";
+  password = "12345";
+  message = false;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  login(loginForm:NgForm) {
+  login(loginForm:any) {
 
+      if (loginForm.value.pseudo == this.pseudo && loginForm.value.password == this.password ) {
+        this.router.navigate(["product"]);
+      } else {
+        this.message = true;
+      }
   }
 
 }
